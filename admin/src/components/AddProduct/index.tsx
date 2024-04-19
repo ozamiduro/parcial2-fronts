@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { Input } from "../Input";
+import { NavLink } from "react-router-dom";
 
 const AddProduct = () => {
   const validationSchema = Yup.object({
@@ -17,11 +18,17 @@ const AddProduct = () => {
 
   return (
     <>
-      <div className={"min-w-md max-w-xl m-[auto] text-center"}>
+      <div
+        className={
+          "min-w-md max-w-xl m-[auto] text-center rounded border bg-white p-4"
+        }
+      >
         <div className={"flex flex-row items-center justify-between"}>
-          <h1>Ingresa la información para un nuevo producto</h1>
-          <a
-            href="/"
+          <h1 className="font-bold font-mono">
+            Ingresa la información para un nuevo producto
+          </h1>
+          <NavLink
+            to="/"
             className={
               "p-1.5 text-sm font-bold inline-flex items-center bg-red-400 text-red-800 flex flex-row justify-center focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center"
             }
@@ -44,8 +51,9 @@ const AddProduct = () => {
               />
             </svg>
             Cancelar
-          </a>
+          </NavLink>
         </div>
+        <div className="border border-gray-900" style={{ margin: "10px 0" }} />
         <Formik
           initialValues={{
             name: "",

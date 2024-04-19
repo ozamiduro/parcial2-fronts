@@ -47,8 +47,14 @@ module.exports = (_, argv) => ({
       remotes: {
         general: "general@http://localhost:8081/remoteEntry.js",
         admin: "admin@http://localhost:8082/remoteEntry.js",
+        user: "user@http://localhost:8083/remoteEntry.js",
       },
-      exposes: {},
+      exposes: {
+        "./hooks/useCartStore": "./src/hooks/useCartStore.tsx",
+        "./providers/Cart": "./src/providers/Cart.tsx",
+        "./Button": "./src/components/Button/index.tsx",
+        "./Icons": "./src/components/Icons/index.tsx",
+      },
       shared: {
         ...deps,
         react: {

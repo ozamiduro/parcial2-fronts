@@ -4,6 +4,9 @@ import { Market } from "./Market";
 import { User } from "./User";
 import { Lock } from "./Lock";
 import { Envelope } from "./Envelope";
+import { Trash } from "./Trash";
+import { Close } from "./Close";
+import { Check } from "./Check";
 
 const listIcons = {
   cart: Cart,
@@ -11,6 +14,9 @@ const listIcons = {
   lock: Lock,
   market: Market,
   user: User,
+  trash: Trash,
+  close: Close,
+  check: Check,
 };
 
 export type IconNames = keyof typeof listIcons;
@@ -21,7 +27,7 @@ interface Props {
   icon: IconNames;
 }
 
-const Icon = ({ color = "black", size = 6, icon }: Props) => {
+const Icons = ({ color = "black", size = 6, icon }: Props) => {
   const IconRender = listIcons[icon];
   const stylesFW = `w-${size} h-${size}`;
   return (
@@ -31,4 +37,4 @@ const Icon = ({ color = "black", size = 6, icon }: Props) => {
   );
 };
 
-export { Icon };
+export default Icons;

@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { Input } from "../Input";
-import { Button } from "../Button";
+import Button from "../Button";
 import { Anchor } from "../Anchor";
 
 const RegisterForm = () => {
@@ -19,7 +19,13 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className={"min-w-md max-w-xl m-[auto] text-center"}>
+    <div
+      className={"min-w-md max-w-xl bg-white rounded m-[auto] text-center"}
+      style={{
+        padding: 20,
+        boxShadow: "0px 0px 8px 0px rgba(0,0,0,0.75)",
+      }}
+    >
       <h1
         className={
           "text-3xl text-center font-mono font-medium my-10 border-t-2 border-b-2 border-gray-900"
@@ -58,15 +64,14 @@ const RegisterForm = () => {
                 icon={"lock"}
               />
               <Button text={"Registrese"} type={"submit"} />
-              <div className={"border-t-2 border-gray-900 w-full mb-2 mt-2"} />
-              <Anchor
-                text={"¿Ya tienes cuenta? Inicie sesión"}
-                link={"/login"}
-              />
             </Form>
           );
         }}
       </Formik>
+      <div className={"border-t-2 border-gray-900 w-full mb-2 mt-5"} />
+      <div className={"m-6"}>
+        <Anchor text={"¿Ya tienes cuenta? Inicie sesión"} link={"/login"} />
+      </div>
     </div>
   );
 };

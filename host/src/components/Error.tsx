@@ -6,17 +6,18 @@ interface ErrorBoundaryProps {
 }
 
 interface ErrorBoundaryState {
+  error: Error | undefined;
   hasError: boolean;
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { error: undefined, hasError: false };
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true };
+    return { error, hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
@@ -26,7 +27,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render(): React.ReactNode {
     if (this.state.hasError) {
-      return <div>¡Ups! Algo salió mal.</div>;
+      return (
+        <div>
+          <p>¡Ups! Algo salió mal.</p> <p>{this.state.error?.message}</p>
+        </div>
+      );
     }
     return this.props.children;
   }

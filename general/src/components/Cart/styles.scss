@@ -1,0 +1,15 @@
+.imageContainer {
+    aspect-ratio: 1 / 1;
+    width: 110px;
+    border-radius: 0.25rem;
+    margin: auto;
+    contain: content;
+
+    > img {
+        transition: 0.5s cubic-bezier(1, 0.03, 0.17, 1);
+    }
+
+    > img:hover {
+        transform: scale(1.5);
+    }
+}
