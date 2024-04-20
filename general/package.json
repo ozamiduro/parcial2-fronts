@@ -4,14 +4,14 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "build:start": "cd dist && PORT=8081 npx serve",
+    "build:start": "cd dist && PORT=3001 npx serve",
     "start": "webpack serve --open --mode development",
     "start:live": "webpack serve --open --mode development --live-reload --hot"
   },
   "license": "MIT",
   "author": {
-    "name": "Jack Herrington",
-    "email": "jherr@pobox.com"
+    "name": "Ozami Duque Rodriguez",
+    "email": "ozami@example.com"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -36,8 +36,10 @@
     "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
+    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "dotenv": "^16.4.5",
     "flowbite-react": "^0.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

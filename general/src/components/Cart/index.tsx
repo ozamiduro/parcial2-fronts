@@ -5,9 +5,24 @@ import Button from "host/Button";
 
 import "./styles.scss";
 import Icons from "host/Icons";
+import { purchaseCart } from "../../service/product";
 
 const Cart = (props: any) => {
   const products: Product[] = props.getCartProducts();
+
+  const onPurchase = async () => {
+    const cart = products.map((product) => {
+      return {
+        productId: product.id,
+        quantity: product.quantity,
+      };
+    });
+
+    for (const product of cart) {
+      const { data } = await purchaseCart(product, props.token);
+      console.log(data);
+    }
+  };
 
   return products.length > 0 ? (
     <>
@@ -18,7 +33,7 @@ const Cart = (props: any) => {
       >
         <button
           className={"p-2 bg-green-600 flex flex-row gap-1 rounded"}
-          onClick={() => props.clearCart()}
+          onClick={() => onPurchase()}
         >
           <Icons icon={"check"} color="white" />
           <span className="font-mono text-white">Comprar</span>
@@ -76,7 +91,7 @@ const Cart = (props: any) => {
                   <img
                     src={product.imageUrl}
                     alt={product.name}
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: "cover", height: "100%" }}
                   />
                 </div>
               </Timeline.Content>

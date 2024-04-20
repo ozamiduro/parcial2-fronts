@@ -4,7 +4,7 @@ const Dotenv = require("dotenv-webpack");
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: "http://localhost:3001/",
   },
 
   resolve: {
@@ -12,7 +12,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 8081,
+    port: 3001,
     historyApiFallback: true,
   },
 
@@ -44,7 +44,7 @@ module.exports = (_, argv) => ({
       name: "general",
       filename: "remoteEntry.js",
       remotes: {
-        host: "host@http://localhost:8080/remoteEntry.js",
+        host: "host@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
         "./Products": "./src/components/Products/index.tsx",

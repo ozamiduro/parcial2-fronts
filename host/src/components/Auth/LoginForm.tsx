@@ -1,11 +1,20 @@
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import * as Yup from "yup";
 import { Input } from "../Input";
 import Button from "../Button";
 import { Anchor } from "../Anchor";
+import { login } from "../../service/auth";
+import { AuthContext } from "../../providers";
+import { jwtDecode } from "jwt-decode";
+import type { User } from "../../entities/User";
+import { addCookies } from "../../utils/Cookies";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Email no valido")
@@ -13,8 +22,13 @@ const LoginForm = () => {
     password: Yup.string().required("Este campo es obligatorio"),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (info: any) => {
+    const { data } = await login(info);
+    const decoded: User = jwtDecode(data.token);
+    const { email, name, role } = decoded;
+    setAuth({ email, name, role, password: "", token: data.token });
+    addCookies("auth", { email, name, role, password: "", token: data.token });
+    navigate("/");
   };
 
   return (

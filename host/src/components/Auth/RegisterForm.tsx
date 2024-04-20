@@ -4,18 +4,25 @@ import * as Yup from "yup";
 import { Input } from "../Input";
 import Button from "../Button";
 import { Anchor } from "../Anchor";
+import { register } from "../../service/auth";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
-    username: Yup.string().required("Este campo es obligatorio"),
+    name: Yup.string().required("Este campo es obligatorio"),
     email: Yup.string()
       .email("Email no valido")
       .required("Este campo es obligatorio"),
     password: Yup.string().required("Este campo es obligatorio"),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (info: any) => {
+    const { status } = await register(info);
+    if (status === 201) {
+      navigate("/login");
+    }
   };
 
   return (
@@ -35,7 +42,7 @@ const RegisterForm = () => {
       </h1>
       <Formik
         initialValues={{
-          username: "",
+          name: "",
           email: "",
           password: "",
         }}
@@ -47,7 +54,7 @@ const RegisterForm = () => {
             <Form>
               <Input
                 label={"Nombre de usuario"}
-                name={"username"}
+                name={"name"}
                 type={"text"}
                 icon={"user"}
               />

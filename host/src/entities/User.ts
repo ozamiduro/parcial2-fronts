@@ -1,8 +1,9 @@
-type Roles = "user" | "admin";
+export type Roles = "client" | "admin";
 
 export interface User {
   email: string;
-  username: string;
+  name: string;
   password: string;
-  rol: Roles;
+  role: Roles;
+  token: string;
 }

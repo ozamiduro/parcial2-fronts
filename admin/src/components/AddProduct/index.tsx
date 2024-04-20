@@ -2,9 +2,13 @@ import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import { Input } from "../Input";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { addProduct } from "../../service/product";
 
-const AddProduct = () => {
+const AddProduct = (props: any) => {
+  console.log(props);
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     name: Yup.string().required("Este campo es obligatorio"),
     price: Yup.number().required("Este campo es obligatorio"),
@@ -12,8 +16,10 @@ const AddProduct = () => {
     quantity: Yup.number().required("Este campo es obligatorio"),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (info: any) => {
+    const { data } = await addProduct(info, props.token);
     console.log(data);
+    navigate("/");
   };
 
   return (

@@ -5,7 +5,7 @@ const deps = require("./package.json").dependencies;
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:8080/",
+    publicPath: "http://localhost:3000/",
   },
 
   resolve: {
@@ -13,7 +13,7 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 8080,
+    port: 3000,
     historyApiFallback: true,
   },
 
@@ -45,9 +45,9 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        general: "general@http://localhost:8081/remoteEntry.js",
-        admin: "admin@http://localhost:8082/remoteEntry.js",
-        user: "user@http://localhost:8083/remoteEntry.js",
+        general: "general@http://localhost:3001/remoteEntry.js",
+        admin: "admin@http://localhost:3002/remoteEntry.js",
+        user: "user@http://localhost:3003/remoteEntry.js",
       },
       exposes: {
         "./hooks/useCartStore": "./src/hooks/useCartStore.tsx",

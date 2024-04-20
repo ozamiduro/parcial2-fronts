@@ -9,7 +9,7 @@ export default function useCartStore() {
     console.log(cart);
   }, [cart, setCart]);
 
-  const incrementQuantity = (id: number) => {
+  const incrementQuantity = (id: string) => {
     const result = cart.map((p) =>
       p.id === id ? { ...p, quantity: p.quantity + 1 } : p
     );
@@ -25,7 +25,7 @@ export default function useCartStore() {
     setCart(result);
   };
 
-  const decrementQuantity = (id: number) => {
+  const decrementQuantity = (id: string) => {
     const rf = cart.map((p) =>
       p.id === id ? { ...p, quantity: Math.max(p.quantity - 1, 0) } : p
     );

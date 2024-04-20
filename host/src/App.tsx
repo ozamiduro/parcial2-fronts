@@ -30,14 +30,6 @@ const App = () => {
     }
   }, []);
 
-  const AuthProvider = () => {
-    return (
-      <AuthContext.Provider value={{ auth, setAuth }}>
-        <Outlet />
-      </AuthContext.Provider>
-    );
-  };
-
   const IsAuthenticated = () => {
     if (auth) {
       return <Outlet />;
@@ -46,35 +38,38 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
-      <div
-        className="p-4"
-        style={{ backgroundColor: "#e7e5e5", minHeight: "calc(100vh - 50px)" }}
-      >
-        <Routes>
-          <Route element={IsAuthenticated()}>
-            <Route
-              path={"/login"}
-              element={
-                <ErrorBoundary>
-                  <Suspense fallback={<Loader />}>
-                    <Login />
-                  </Suspense>
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path={"/register"}
-              element={
-                <ErrorBoundary>
-                  <Suspense fallback={<Loader />}>
-                    <Register />
-                  </Suspense>
-                </ErrorBoundary>
-              }
-            />
-          </Route>
-          <Route element={<AuthProvider />}>
+      <AuthContext.Provider value={{ auth, setAuth }}>
+        <NavBar />
+        <div
+          className="p-4"
+          style={{
+            backgroundColor: "#e7e5e5",
+            minHeight: "calc(100vh - 50px)",
+          }}
+        >
+          <Routes>
+            <Route element={IsAuthenticated()}>
+              <Route
+                path={"/login"}
+                element={
+                  <ErrorBoundary>
+                    <Suspense fallback={<Loader />}>
+                      <Login />
+                    </Suspense>
+                  </ErrorBoundary>
+                }
+              />
+              <Route
+                path={"/register"}
+                element={
+                  <ErrorBoundary>
+                    <Suspense fallback={<Loader />}>
+                      <Register />
+                    </Suspense>
+                  </ErrorBoundary>
+                }
+              />
+            </Route>
             <Route
               path={"/test"}
               element={
@@ -105,29 +100,29 @@ const App = () => {
                 </ErrorBoundary>
               }
             />
-          </Route>
-          <Route
-            path={"/addproduct"}
-            element={
-              <ErrorBoundary>
-                <Suspense fallback={<Loader />}>
-                  <AddProduct />
-                </Suspense>
-              </ErrorBoundary>
-            }
-          />
-          <Route
-            path={"/profile"}
-            element={
-              <ErrorBoundary>
-                <Suspense fallback={<Loader />}>
-                  <ProfilePage />
-                </Suspense>
-              </ErrorBoundary>
-            }
-          />
-        </Routes>
-      </div>
+            <Route
+              path={"/addproduct"}
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<Loader />}>
+                    <AddProduct />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path={"/profile"}
+              element={
+                <ErrorBoundary>
+                  <Suspense fallback={<Loader />}>
+                    <ProfilePage />
+                  </Suspense>
+                </ErrorBoundary>
+              }
+            />
+          </Routes>
+        </div>
+      </AuthContext.Provider>
     </>
   );
 };
